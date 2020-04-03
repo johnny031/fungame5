@@ -71,19 +71,19 @@ h3 {
   margin: 0 auto;
 }
 .button {
-  font-size: 1.5vw;
+  font-size: 13px;
   margin: 0 0.5vw;
 }
 #three_more,
 #board_toggle,
 #qrcode_btn {
-  font-size: 1.5vw;
+  font-size: 13px;
   margin-bottom: 0.5rem;
 }
 #summit {
   margin: 0 0.5vw 0 auto;
   display: none;
-  font-size: 1.5vw;
+  font-size: 13px;
 }
 @media only screen and (max-width: 1000px) {
   .card {
@@ -110,5 +110,12 @@ h3 {
   }
   #remain {
     font-size: 17px;
+  }
+  #three_more,
+  #board_toggle,
+  #qrcode_btn,
+  #summit,
+  .button {
+    font-size: 11px;
   }
 }
