@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+      integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+      crossorigin="anonymous"
+    />
+    <title>fungame5</title>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <h3 style="font-family:Microsoft JhengHei">遊戲人數：</h3>
+      <input autofocus type="number" id="number" />
+
+      <button id="number_button" onclick="myFunction()">確認</button>
+    </div>
+  </body>
+  <script>
+    function shuffle(a) {
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    }
+    function myFunction() {
+      var x = document.getElementById("number").value;
+      if (x < 2 || x > 8) {
+        alert("遊戲人數需介於2至8人之間");
+        return false;
+      } else {
+        document.getElementById("number_button").disabled = true;
+      }
+      let r = [];
+      for (let i = 0; i < 81; i++) {
+        r.push(i);
+      }
+      shuffle(r);
+      console.log(r);
+
+      var h3 = document.createElement("h3");
+      h3.innerHTML = "<br> 玩家名稱：<br>";
+      h3.style.fontFamily = "Microsoft JhengHei";
+      document.body.appendChild(h3);
+      document.querySelector(".container-fluid").appendChild(h3);
+
+      var f = document.createElement("form");
+      f.setAttribute("method", "get");
+      f.setAttribute("name", "form_role");
+      f.setAttribute("action", "{{ url_for('hello') }}");
+      f.setAttribute("onsubmit", "return validateForm()");
+
+      var nameInputContainer = document.createElement("div");
+      nameInputContainer.setAttribute("id", "name_input_container");
+
+      for (i = 0; i < x; i++) {
+        var input = document.createElement("input");
+        input.type = "text";
+        input.name = "n";
+        input.className = i;
+        input.style.display = "block";
+        input.style.margin = "10px";
+        input.style.padding = "5px";
+        nameInputContainer.appendChild(input);
+        f.appendChild(nameInputContainer);
+      }
+
+      for (i = 0; i < 81; i++) {
+        var input = document.createElement("input");
+        input.type = "text";
+        input.value = r[i];
+        input.name = "r";
+        input.style.display = "none";
+        f.appendChild(input);
+      }
+
+      var s = document.createElement("input");
+
+      s.setAttribute("type", "submit");
+      s.setAttribute("value", "Start!");
+      f.appendChild(s);
+
+      document.getElementsByTagName("body")[0].appendChild(f);
+      document.querySelector(".container-fluid").appendChild(f);
+    }
+
+    function validateForm() {
+      var nameContainer = document.getElementById("name_input_container");
+      var nameInputs = nameContainer.getElementsByTagName("input");
+      for (i = 0; i < nameInputs.length; i++) {
+        if (nameInputs[i].value === "") {
+          alert("玩家名稱請勿空白");
+          return false;
+        }
+      }
+    }
+  </script>
+</html>

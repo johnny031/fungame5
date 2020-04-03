@@ -1,0 +1,114 @@
+body {
+  padding-top: 0.5rem;
+}
+table {
+  width: 130px;
+}
+table,
+th,
+td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  text-align: center;
+}
+th,
+td,
+h3,
+#summit,
+#three_more,
+#board_toggle,
+#qrcode_btn,
+.button {
+  font-family: Microsoft JhengHei;
+}
+h3 {
+  font-size: 18px;
+  margin-bottom: 0.8rem;
+}
+#remain {
+  font-size: 22px;
+  font-weight: bolder;
+  border-bottom: 1px solid #000;
+  padding-bottom: 0.5px;
+}
+.board_div {
+  padding-bottom: 20px;
+}
+.container_label {
+  position: relative;
+}
+.container_label input {
+  position: absolute;
+  opacity: 0;
+  height: 0;
+  width: 0;
+}
+.card {
+  width: 16vw;
+  height: calc(16vw * 0.6);
+  margin: 0 0.5vw;
+  background-color: #eee;
+}
+.card img {
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: auto;
+  margin-bottom: auto;
+  height: calc(16vw * 0.52);
+}
+
+.container_label input:checked ~ .card {
+  background-color: rgb(255, 244, 228);
+  box-shadow: 3px 3px 3px rgb(88, 88, 88);
+}
+#extra_cards {
+  width: 51vw;
+  margin: 0 auto;
+}
+#cards_div {
+  width: 68vw;
+  margin: 0 auto;
+}
+.button {
+  font-size: 1.5vw;
+  margin: 0 0.5vw;
+}
+#three_more,
+#board_toggle,
+#qrcode_btn {
+  font-size: 1.5vw;
+  margin-bottom: 0.5rem;
+}
+#summit {
+  margin: 0 0.5vw 0 auto;
+  display: none;
+  font-size: 1.5vw;
+}
+@media only screen and (max-width: 1000px) {
+  .card {
+    width: 22vw;
+    height: calc(22vw * 0.6);
+    margin: 0 0.25vw;
+  }
+  .card img {
+    height: calc(22vw * 0.52);
+  }
+  #extra_cards {
+    width: 67.5vw;
+  }
+  #cards_div {
+    width: 90vw;
+  }
+}
+@media only screen and (max-width: 600px) {
+  table {
+    width: 100px;
+  }
+  h3 {
+    font-size: 13px;
+  }
+  #remain {
+    font-size: 17px;
+  }
+}
