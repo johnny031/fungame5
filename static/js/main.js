@@ -185,12 +185,14 @@ function change_cards(chosen_cards) {
         "src",
         "/static/img/" + r[current_card + i] + ".png"
       );
-      $("img[src='/static/img/" + r[current_card + i] + ".png']").fadeIn(
-        "slow"
-      );
       $("input[value='" + chosen_cards[i] + "']").attr(
         "value",
         r[current_card + i]
+      );
+    }
+    for (let i = 0; i < 3; i++) {
+      $("img[src='/static/img/" + r[current_card + i] + ".png']").fadeIn(
+        "slow"
       );
     }
     current_card += 3;
