@@ -190,13 +190,15 @@ function change_cards(chosen_cards) {
         r[current_card + i]
       );
     }
-    for (let i = 0; i < 3; i++) {
-      $("img[src='/static/img/" + r[current_card + i] + ".png']").fadeIn(
-        "slow"
-      );
-    }
-    current_card += 3;
-    $("#remain").html(81 - current_card);
+    setTimeout(() => {
+      for (let i = 0; i < 3; i++) {
+        $("img[src='/static/img/" + r[current_card + i] + ".png']").fadeIn(
+          "slow"
+        );
+      }
+      current_card += 3;
+      $("#remain").html(81 - current_card);
+    }, 200);
   }
 }
 function rearrange(chosen_cards) {
