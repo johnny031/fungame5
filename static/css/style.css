@@ -18,6 +18,7 @@ h3,
 #three_more,
 #board_toggle,
 #qrcode_btn,
+#set_left,
 .button {
   font-family: Microsoft JhengHei;
 }
@@ -76,7 +77,8 @@ h3 {
 }
 #three_more,
 #board_toggle,
-#qrcode_btn {
+#qrcode_btn,
+#set_left {
   font-size: 17px;
   margin-bottom: 0.5rem;
 }
@@ -117,6 +119,7 @@ h3 {
   #three_more,
   #board_toggle,
   #qrcode_btn,
+  #set_left,
   #summit,
   .button {
     font-size: 12px;

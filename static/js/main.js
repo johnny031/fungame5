@@ -29,14 +29,14 @@ for (let i = 0; i < x; i++) {
   tr.append(td2);
   $("#board").append(tr);
 }
-$(document).ready(function() {
+$(document).ready(function () {
   $("#qrcode").qrcode({
     text: window.location.href,
     render: "canvas",
     width: 300,
-    height: 300
+    height: 300,
   });
-  $("#three_more").on("click", function() {
+  $("#three_more").on("click", function () {
     add_three_cards++;
     let div_row = document.createElement("div");
     div_row.className = "row";
@@ -106,55 +106,38 @@ $(document).ready(function() {
   button_row.append(summit_btn);
   $("#cards_div").append(button_row);
   $("label input[type='checkbox']").prop("disabled", true);
-  $(".button").on("click", function() {
+  $(".button").on("click", function () {
     $("#three_more").prop("disabled", true);
     $(".button").prop("disabled", true);
     $("#summit").show();
     $("label input[type='checkbox']").prop("disabled", false);
-    current_player = $(this)
-      .attr("id")
-      .slice(-1);
+    current_player = $(this).attr("id").slice(-1);
   });
-  $(document).on("change", "label input[type='checkbox']", function() {
+  $(document).on("change", "label input[type='checkbox']", function () {
     if ($("label input[type='checkbox']:checked").length > 3) {
       this.checked = false;
     }
   });
-  $("#summit").on("click", function() {
+  $("#summit").on("click", function () {
     chosen_cards = $("label input[type='checkbox']:checked")
-      .map(function() {
+      .map(function () {
         return $(this).val();
       })
       .get();
-    for (let i = 0; i < 4; i++) {
-      for (let j = 0; j < 3; j++) {
-        let x = j > 1 ? -2 : 1;
-        if (
-          chosen_cards[j].slice(i, i + 1) ===
-          chosen_cards[j + x].slice(i, i + 1)
-        ) {
-          same++;
-        }
-      }
-      if (same === 1) {
-        alert("失敗QQ");
-        let minus = $("#score" + current_player).html();
-        minus--;
-        $("#score" + current_player).html(minus);
-        same = 0;
-        break;
-      }
-      same = 0;
-      if (i === 3) {
-        alert("正確！");
-        let plus = $("#score" + current_player).html();
-        plus++;
-        $("#score" + current_player).html(plus);
-        if (add_three_cards > 0) {
-          rearrange(chosen_cards);
-        } else {
-          change_cards(chosen_cards);
-        }
+    if (set_or_not(chosen_cards) === 0) {
+      alert("失敗QQ");
+      let minus = $("#score" + current_player).html();
+      minus--;
+      $("#score" + current_player).html(minus);
+    } else {
+      alert("正確！");
+      let plus = $("#score" + current_player).html();
+      plus++;
+      $("#score" + current_player).html(plus);
+      if (add_three_cards > 0) {
+        rearrange(chosen_cards);
+      } else {
+        change_cards(chosen_cards);
       }
     }
     if (current_card < 81) {
@@ -165,11 +148,14 @@ $(document).ready(function() {
     $("label input[type='checkbox']").prop("checked", false);
     $("label input[type='checkbox']").prop("disabled", true);
   });
-  $("#board_toggle").on("click", function() {
+  $("#board_toggle").on("click", function () {
     $(".board_div").slideToggle();
   });
-  $("#qrcode_btn").on("click", function() {
+  $("#qrcode_btn").on("click", function () {
     $("#qrcode").slideToggle();
+  });
+  $("#set_left").on("click", function () {
+    find_set();
   });
 });
 function change_cards(chosen_cards) {
@@ -203,20 +189,20 @@ function change_cards(chosen_cards) {
 }
 function rearrange(chosen_cards) {
   extra_cards = $("#seq" + add_three_cards + " input[type='checkbox']")
-    .map(function() {
+    .map(function () {
       return $(this).val();
     })
     .get();
   for (let i = 0; i < 3; i++) {
     $("img[src='/static/img/" + chosen_cards[i] + ".png']").hide();
   }
-  var common = $.grep(chosen_cards, function(a) {
+  var common = $.grep(chosen_cards, function (a) {
     return $.inArray(a, extra_cards) !== -1;
   });
-  chosen_cards = $.grep(chosen_cards, function(a) {
+  chosen_cards = $.grep(chosen_cards, function (a) {
     return $.inArray(a, common) === -1;
   });
-  extra_cards = $.grep(extra_cards, function(a) {
+  extra_cards = $.grep(extra_cards, function (a) {
     return $.inArray(a, common) === -1;
   });
   for (let i = 0; i < extra_cards.length; i++) {
@@ -228,9 +214,71 @@ function rearrange(chosen_cards) {
     $("input[value='" + chosen_cards[i] + "']").attr("value", extra_cards[i]);
   }
   setTimeout(() => {
-    $("#seq" + add_three_cards).slideUp("slow", function() {
+    $("#seq" + add_three_cards).slideUp("slow", function () {
       $(this).remove();
     });
     add_three_cards--;
   }, 500);
+}
+function set_or_not(chosen_cards) {
+  let set_or_not;
+  for (let i = 0; i < 4; i++) {
+    for (let j = 0; j < 3; j++) {
+      let x = j > 1 ? -2 : 1;
+      if (
+        chosen_cards[j].slice(i, i + 1) === chosen_cards[j + x].slice(i, i + 1)
+      ) {
+        same++;
+      }
+    }
+    if (same === 1) {
+      set_or_not = 0;
+      same = 0;
+      break;
+    }
+    same = 0;
+    if (i === 3) {
+      set_or_not = 1;
+    }
+  }
+  return set_or_not;
+}
+function k_combinations(set, k) {
+  var i, j, combs, head, tailcombs;
+  if (k > set.length || k <= 0) {
+    return [];
+  }
+  if (k == set.length) {
+    return [set];
+  }
+  if (k == 1) {
+    combs = [];
+    for (i = 0; i < set.length; i++) {
+      combs.push([set[i]]);
+    }
+    return combs;
+  }
+  combs = [];
+  for (i = 0; i < set.length - k + 1; i++) {
+    head = set.slice(i, i + 1);
+    tailcombs = k_combinations(set.slice(i + 1), k - 1);
+    for (j = 0; j < tailcombs.length; j++) {
+      combs.push(head.concat(tailcombs[j]));
+    }
+  }
+  return combs;
+}
+function find_set() {
+  let set_number = 0;
+  let all_cards = $("input[type='checkbox']")
+    .map(function () {
+      return $(this).val();
+    })
+    .get();
+  for (let i = 0; i < k_combinations(all_cards, 3).length; i++) {
+    if (set_or_not(k_combinations(all_cards, 3)[i]) === 1) {
+      set_number++;
+    }
+  }
+  alert("有 " + set_number + " 種可能組合");
 }
