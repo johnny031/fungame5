@@ -140,9 +140,7 @@ $(document).ready(function () {
         change_cards(chosen_cards);
       }
     }
-    if (current_card < 81) {
-      $("#three_more").prop("disabled", false);
-    }
+    current_card < 81 && $("#three_more").prop("disabled", false);
     $("#summit").hide();
     $(".button").prop("disabled", false);
     $("label input[type='checkbox']").prop("checked", false);
@@ -176,14 +174,14 @@ function change_cards(chosen_cards) {
         r[current_card + i]
       );
     }
+    current_card += 3;
+    $("#remain").html(81 - current_card);
     setTimeout(() => {
       for (let i = 0; i < 3; i++) {
-        $("img[src='/static/img/" + r[current_card + i] + ".png']").fadeIn(
+        $("img[src='/static/img/" + r[current_card + i - 3] + ".png']").fadeIn(
           "slow"
         );
       }
-      current_card += 3;
-      $("#remain").html(81 - current_card);
     }, 200);
   }
 }
