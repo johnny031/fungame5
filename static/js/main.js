@@ -124,7 +124,7 @@ $(document).ready(function () {
         return $(this).val();
       })
       .get();
-    if (set_or_not(chosen_cards) === 0) {
+    if (!set_or_not(chosen_cards)) {
       alert("失敗QQ");
       let minus = $("#score" + current_player).html();
       minus--;
@@ -230,13 +230,13 @@ function set_or_not(chosen_cards) {
       }
     }
     if (same === 1) {
-      set_or_not = 0;
+      set_or_not = false;
       same = 0;
       break;
     }
     same = 0;
     if (i === 3) {
-      set_or_not = 1;
+      set_or_not = true;
     }
   }
   return set_or_not;
@@ -274,7 +274,7 @@ function find_set() {
     })
     .get();
   for (let i = 0; i < k_combinations(all_cards, 3).length; i++) {
-    if (set_or_not(k_combinations(all_cards, 3)[i]) === 1) {
+    if (set_or_not(k_combinations(all_cards, 3)[i])) {
       set_number++;
     }
   }
