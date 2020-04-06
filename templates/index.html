@@ -11,9 +11,29 @@
     />
     <title>fungame5</title>
   </head>
+  <style>
+    body {
+      background-color: rgb(0, 0, 0);
+    }
+    h3 {
+      color: white;
+    }
+    button,
+    input[type="submit"] {
+      font-family: Microsoft JhengHei;
+      background-color: rgb(255, 255, 255);
+    }
+    input[type="text"],
+    #number {
+      background-color: rgb(194, 194, 194);
+    }
+    input[type="text"] {
+      margin: 10px 0 !important;
+    }
+  </style>
   <body>
     <div class="container-fluid" style="padding-top: 12px;">
-      <h3 style="font-family:Microsoft JhengHei">遊戲人數：</h3>
+      <h3 style="font-family: Microsoft JhengHei;">遊戲人數：</h3>
       <input autofocus type="number" id="number" />
       <button id="number_button" onclick="myFunction()">確認</button>
     </div>
@@ -28,8 +48,8 @@
     }
     function myFunction() {
       var x = document.getElementById("number").value;
-      if (x < 2 || x > 8) {
-        alert("遊戲人數需介於2至8人之間");
+      if (x < 1 || x > 8) {
+        alert("遊戲人數需介於1至8人之間");
         return false;
       } else {
         document.getElementById("number_button").disabled = true;
@@ -39,7 +59,6 @@
         r.push(i);
       }
       shuffle(r);
-      console.log(r);
 
       var h3 = document.createElement("h3");
       h3.innerHTML = "<br> 玩家名稱：<br>";
@@ -80,7 +99,7 @@
       var s = document.createElement("input");
 
       s.setAttribute("type", "submit");
-      s.setAttribute("value", "Start!");
+      s.setAttribute("value", "開始!");
       f.appendChild(s);
 
       document.getElementsByTagName("body")[0].appendChild(f);
