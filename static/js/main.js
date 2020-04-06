@@ -29,6 +29,9 @@ for (let i = 0; i < x; i++) {
   tr.append(td2);
   $("#board").append(tr);
 }
+for (let i = 0; i < 81; i++) {
+  $("<img/>")[0].src = "/static/img/" + r[i] + ".png";
+}
 $(document).ready(function () {
   $("#qrcode").qrcode({
     text: window.location.href,
