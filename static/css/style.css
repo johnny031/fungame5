@@ -32,7 +32,7 @@ h3 {
 #remain {
   font-size: 22px;
   font-weight: bolder;
-  border-bottom: 1px solid #000;
+  border-bottom: 1px solid rgb(255, 255, 255);
   padding-bottom: 0.5px;
 }
 .board_div {
@@ -90,11 +90,11 @@ button {
   margin-bottom: 0.5rem;
 }
 #summit {
-  margin: 0 0.5vw 0 auto;
+  margin: 0.5vw 0.5vw 0 auto;
   display: none;
 }
 #players_div {
-  padding: 15px 0 50px 0;
+  padding: 1.8vw 0 50px 0;
 }
 @media only screen and (max-width: 1000px) {
   .card {
