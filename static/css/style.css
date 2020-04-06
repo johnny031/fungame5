@@ -1,5 +1,6 @@
 body {
   padding-top: 0.5rem;
+  background-color: rgba(0, 0, 0, 0.89);
 }
 table {
   width: 130px;
@@ -7,7 +8,8 @@ table {
 table,
 th,
 td {
-  border: 1px solid black;
+  color: white;
+  border: 1px solid rgb(255, 255, 255);
   border-collapse: collapse;
   text-align: center;
 }
@@ -23,6 +25,7 @@ h3,
   font-family: Microsoft JhengHei;
 }
 h3 {
+  color: white;
   font-size: 18px;
   margin-bottom: 0.8rem;
 }
@@ -48,9 +51,11 @@ h3 {
   width: 16vw;
   height: calc(16vw * 0.6);
   margin: 0 0.5vw;
-  background-color: #eee;
+  background-color: rgb(235, 235, 235);
+  border-radius: 1vw;
 }
 .card img {
+  filter: brightness(0.8);
   display: inline-block;
   margin-left: auto;
   margin-right: auto;
@@ -60,7 +65,7 @@ h3 {
 }
 
 .container_label input:checked ~ .card {
-  background-color: rgb(255, 244, 228);
+  background-color: rgb(192, 192, 192);
   box-shadow: 3px 3px 3px rgb(88, 88, 88);
 }
 #extra_cards {
@@ -71,24 +76,25 @@ h3 {
   width: 68vw;
   margin: 0 auto;
 }
-.button {
+button {
+  background-color: rgb(238, 238, 238);
   font-size: 17px;
+}
+.button {
   margin: 0 0.5vw;
 }
 #three_more,
 #board_toggle,
 #qrcode_btn,
 #set_left {
-  font-size: 17px;
   margin-bottom: 0.5rem;
 }
 #summit {
   margin: 0 0.5vw 0 auto;
   display: none;
-  font-size: 17px;
 }
 #players_div {
-  padding-bottom: 50px;
+  padding: 15px 0 50px 0;
 }
 @media only screen and (max-width: 1000px) {
   .card {
