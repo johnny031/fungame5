@@ -1,6 +1,6 @@
 body {
   padding-top: 0.5rem;
-  background-color: rgba(0, 0, 0, 0.89);
+  background-color: black;
 }
 table {
   width: 130px;
@@ -51,7 +51,7 @@ h3 {
   width: 16vw;
   height: calc(16vw * 0.6);
   margin: 0 0.5vw;
-  background-color: rgb(235, 235, 235);
+  background-color: rgb(241, 241, 241);
   border-radius: 1vw;
 }
 .card img {
@@ -65,8 +65,8 @@ h3 {
 }
 
 .container_label input:checked ~ .card {
-  background-color: rgb(192, 192, 192);
-  box-shadow: 3px 3px 3px rgb(88, 88, 88);
+  background-color: rgb(180, 180, 180);
+  box-shadow: 0.3vw 0.3vw 0.3vw rgb(129, 129, 129);
 }
 #extra_cards {
   width: 51vw;
