@@ -66,7 +66,7 @@ h3 {
 
 .container_label input:checked ~ .card {
   background-color: rgb(180, 180, 180);
-  box-shadow: 0.3vw 0.3vw 0.3vw rgb(129, 129, 129);
+  box-shadow: 0.3vw 0.3vw 0.3vw rgb(112, 112, 112);
 }
 #extra_cards {
   width: 51vw;
