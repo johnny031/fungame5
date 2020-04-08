@@ -35,6 +35,16 @@ h3 {
   border-bottom: 1px solid rgb(255, 255, 255);
   padding-bottom: 0.5px;
 }
+#qrcode {
+  width: 320px;
+  height: 320px;
+  margin: 15px auto;
+  background-color: white;
+  border-radius: 1vw;
+}
+canvas {
+  margin-top: 10px;
+}
 .board_div {
   padding-bottom: 20px;
 }
