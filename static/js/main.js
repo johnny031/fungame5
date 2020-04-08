@@ -112,7 +112,7 @@ $(document).ready(function () {
   $(".button").on("click", function () {
     $("#three_more").prop("disabled", true);
     $(".button").prop("disabled", true);
-    $("#summit").show();
+    $("#summit").slideDown();
     $("label input[type='checkbox']").prop("disabled", false);
     current_player = $(this).attr("id").slice(-1);
   });
@@ -144,7 +144,7 @@ $(document).ready(function () {
       }
     }
     current_card < 81 && $("#three_more").prop("disabled", false);
-    $("#summit").hide();
+    $("#summit").slideUp();
     $(".button").prop("disabled", false);
     $("label input[type='checkbox']").prop("checked", false);
     $("label input[type='checkbox']").prop("disabled", true);
