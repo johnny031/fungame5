@@ -1,6 +1,6 @@
 let same = 0;
 let current_player = -1;
-let current_card = 12;
+let current_card = 78;
 let add_three_cards = 0;
 let chosen_cards = [];
 let extra_cards = [];
@@ -72,7 +72,7 @@ $(document).ready(function () {
     if (current_card > 78) {
       $(this).prop("disabled", true);
     }
-    if (no_set) {
+    if (no_set && current_card < 81) {
       setTimeout(() => {
         find_set() === 0
           ? alert("仍無可能的組合，再抽三張牌")
@@ -157,7 +157,7 @@ $(document).ready(function () {
     $("label input[type='checkbox']").prop("checked", false);
     $("label input[type='checkbox']").prop("disabled", true);
     setTimeout(() => {
-      if (find_set() === 0) {
+      if (find_set() === 0 && current_card < 81) {
         alert("沒有可能的組合，請抽三張牌");
         no_set = true;
       }
