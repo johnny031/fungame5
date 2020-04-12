@@ -170,7 +170,7 @@ $(document).ready(function () {
           no_set = true;
         }
       }
-    }, 1200);
+    }, 1600);
   });
   $("#board_toggle").on("click", function () {
     $(".board_div").slideToggle();
@@ -260,7 +260,7 @@ function rearrange(chosen_cards) {
       $(this).remove();
     });
     add_three_cards--;
-  }, 600);
+  }, 800);
 }
 function set_or_not(chosen_cards) {
   let set_or_not;
@@ -335,11 +335,12 @@ function move(ori, des) {
     .getBoundingClientRect();
   $("img[src='/static/img/" + ori + ".png']")
     .parent(".card")
+    .css("z-index", 1)
     .animate(
       {
         top: rect2.top - rect1.top,
         left: rect2.left - rect1.left,
       },
-      600
+      800
     );
 }

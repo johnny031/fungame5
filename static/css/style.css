@@ -73,10 +73,6 @@ canvas {
   margin-top: auto;
   margin-bottom: auto;
   height: calc(16vw * 0.52);
-  /* color: rgb(255, 199, 199); */
-}
-#extra_cards .card {
-  z-index: 1;
 }
 .container_label input:checked ~ .card {
   background-color: rgb(180, 180, 180);
