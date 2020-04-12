@@ -135,13 +135,19 @@ $(document).ready(function () {
         return $(this).val();
       })
       .get();
+    $("label input[type='checkbox']").prop("checked", false);
     if (!set_or_not(chosen_cards)) {
-      alert("失敗QQ");
+      for (let i = 0; i < chosen_cards.length; i++) {
+        $("img[src='/static/img/" + chosen_cards[i] + ".png']")
+          .parent(".card")
+          .effect("highlight", { color: "#ffa3a3" }, 500)
+          .dequeue()
+          .effect("shake", { distance: 4, times: 3 });
+      }
       let minus = $("#score" + current_player).html();
       minus--;
       $("#score" + current_player).html(minus);
     } else {
-      alert("正確！");
       let plus = $("#score" + current_player).html();
       plus++;
       $("#score" + current_player).html(plus);
@@ -154,14 +160,15 @@ $(document).ready(function () {
     current_card < 81 && $("#three_more").prop("disabled", false);
     $("#summit").slideUp();
     $(".button").prop("disabled", false);
-    $("label input[type='checkbox']").prop("checked", false);
     $("label input[type='checkbox']").prop("disabled", true);
     setTimeout(() => {
-      if (find_set() === 0 && current_card < 81) {
-        alert("沒有可能的組合，請抽三張牌");
+      if (find_set() === 0) {
+        current_card < 81
+          ? alert("沒有可能的組合，請抽三張牌")
+          : alert("沒有可能的組合，遊戲結束");
         no_set = true;
       }
-    }, 1500);
+    }, 1200);
   });
   $("#board_toggle").on("click", function () {
     $(".board_div").slideToggle();
@@ -189,11 +196,9 @@ function change_cards(chosen_cards) {
     for (let i = 0; i < 3; i++) {
       $("img[src='/static/img/" + chosen_cards[i] + ".png']")
         .parent(".card")
-        .css("visibility", "hidden");
-      $("img[src='/static/img/" + chosen_cards[i] + ".png']").attr(
-        "src",
-        "/static/img/" + r[current_card + i] + ".png"
-      );
+        .effect("highlight", { color: "#fffc96" }, 1000)
+        .dequeue()
+        .animate({ opacity: 0 }, 600);
       $("input[value='" + chosen_cards[i] + "']").attr(
         "value",
         r[current_card + i]
@@ -203,13 +208,16 @@ function change_cards(chosen_cards) {
     $("#remain").html(81 - current_card);
     setTimeout(() => {
       for (let i = 0; i < 3; i++) {
+        $("img[src='/static/img/" + chosen_cards[i] + ".png']").attr(
+          "src",
+          "/static/img/" + r[current_card + i - 3] + ".png"
+        );
         $("img[src='/static/img/" + r[current_card + i - 3] + ".png']")
           .parent(".card")
-          .css("visibility", "visible")
-          .hide()
-          .fadeIn();
+          .animate({ opacity: 1 }, 600)
+          .effect("highlight", { color: "#fffc96" }, 700);
       }
-    }, 200);
+    }, 600);
   }
 }
 function rearrange(chosen_cards) {
