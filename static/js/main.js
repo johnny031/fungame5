@@ -1,6 +1,6 @@
 let same = 0;
 let current_player = -1;
-let current_card = 78;
+let current_card = 12;
 let add_three_cards = 0;
 let chosen_cards = [];
 let extra_cards = [];
