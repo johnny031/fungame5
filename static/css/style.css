@@ -67,13 +67,16 @@ canvas {
 .card img {
   filter: brightness(0.8);
   display: inline-block;
+  position: relative;
   margin-left: auto;
   margin-right: auto;
   margin-top: auto;
   margin-bottom: auto;
   height: calc(16vw * 0.52);
 }
-
+#extra_cards .card {
+  z-index: 1;
+}
 .container_label input:checked ~ .card {
   background-color: rgb(180, 180, 180);
   box-shadow: 0.3vw 0.3vw 0.3vw rgb(112, 112, 112);

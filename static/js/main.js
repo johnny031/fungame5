@@ -71,6 +71,9 @@ $(document).ready(function () {
     if (current_card > 78) {
       $(this).prop("disabled", true);
     }
+    setTimeout(() => {
+      find_set() === 0 && alert("沒有可能的組合，請抽三張牌");
+    }, 800);
   });
   for (let i = 0; i < n.length; i++) {
     let btn = document.createElement("button");
@@ -148,6 +151,9 @@ $(document).ready(function () {
     $(".button").prop("disabled", false);
     $("label input[type='checkbox']").prop("checked", false);
     $("label input[type='checkbox']").prop("disabled", true);
+    setTimeout(() => {
+      find_set() === 0 && alert("沒有可能的組合，請抽三張牌");
+    }, 1500);
   });
   $("#board_toggle").on("click", function () {
     $(".board_div").slideToggle();
@@ -156,18 +162,23 @@ $(document).ready(function () {
     $("#qrcode").slideToggle();
   });
   $("#set_left").on("click", function () {
-    find_set();
+    alert("有 " + find_set() + " 種可能組合");
   });
+  find_set() === 0 && alert("沒有可能的組合，請抽三張牌");
 });
 function change_cards(chosen_cards) {
   if (current_card > 78) {
     for (let i = 0; i < 3; i++) {
-      $("img[src='/static/img/" + chosen_cards[i] + ".png']").hide();
+      $("img[src='/static/img/" + chosen_cards[i] + ".png']")
+        .parent(".card")
+        .css("visibility", "hidden");
       $("input[value='" + chosen_cards[i] + "']").remove();
     }
   } else {
     for (let i = 0; i < 3; i++) {
-      $("img[src='/static/img/" + chosen_cards[i] + ".png']").hide();
+      $("img[src='/static/img/" + chosen_cards[i] + ".png']")
+        .parent(".card")
+        .css("visibility", "hidden");
       $("img[src='/static/img/" + chosen_cards[i] + ".png']").attr(
         "src",
         "/static/img/" + r[current_card + i] + ".png"
@@ -181,9 +192,11 @@ function change_cards(chosen_cards) {
     $("#remain").html(81 - current_card);
     setTimeout(() => {
       for (let i = 0; i < 3; i++) {
-        $("img[src='/static/img/" + r[current_card + i - 3] + ".png']").fadeIn(
-          "slow"
-        );
+        $("img[src='/static/img/" + r[current_card + i - 3] + ".png']")
+          .parent(".card")
+          .css("visibility", "visible")
+          .hide()
+          .fadeIn();
       }
     }, 200);
   }
@@ -195,7 +208,9 @@ function rearrange(chosen_cards) {
     })
     .get();
   for (let i = 0; i < 3; i++) {
-    $("img[src='/static/img/" + chosen_cards[i] + ".png']").hide();
+    $("img[src='/static/img/" + chosen_cards[i] + ".png']")
+      .parent(".card")
+      .css("visibility", "hidden");
   }
   var common = $.grep(chosen_cards, function (a) {
     return $.inArray(a, extra_cards) !== -1;
@@ -207,19 +222,24 @@ function rearrange(chosen_cards) {
     return $.inArray(a, common) === -1;
   });
   for (let i = 0; i < extra_cards.length; i++) {
+    move(extra_cards[i], chosen_cards[i]);
     $("img[src='/static/img/" + chosen_cards[i] + ".png']").attr(
       "src",
       "/static/img/" + extra_cards[i] + ".png"
     );
-    $("img[src='/static/img/" + extra_cards[i] + ".png']").fadeIn("slow");
     $("input[value='" + chosen_cards[i] + "']").attr("value", extra_cards[i]);
   }
   setTimeout(() => {
+    for (let i = 0; i < extra_cards.length; i++) {
+      $("img[src='/static/img/" + extra_cards[i] + ".png']")
+        .parent(".card")
+        .css("visibility", "visible");
+    }
     $("#seq" + add_three_cards).slideUp("slow", function () {
       $(this).remove();
     });
     add_three_cards--;
-  }, 500);
+  }, 600);
 }
 function set_or_not(chosen_cards) {
   let set_or_not;
@@ -281,5 +301,24 @@ function find_set() {
       set_number++;
     }
   }
-  alert("有 " + set_number + " 種可能組合");
+  return set_number;
+}
+function move(ori, des) {
+  let rect1 = document
+    .querySelector("img[src='/static/img/" + ori + ".png']")
+    .closest(".card")
+    .getBoundingClientRect();
+  let rect2 = document
+    .querySelector("img[src='/static/img/" + des + ".png']")
+    .closest(".card")
+    .getBoundingClientRect();
+  $("img[src='/static/img/" + ori + ".png']")
+    .parent(".card")
+    .animate(
+      {
+        top: rect2.top - rect1.top,
+        left: rect2.left - rect1.left,
+      },
+      600
+    );
 }
