@@ -140,9 +140,9 @@ $(document).ready(function () {
       for (let i = 0; i < chosen_cards.length; i++) {
         $("img[src='/static/img/" + chosen_cards[i] + ".png']")
           .parent(".card")
-          .effect("highlight", { color: "#ffa3a3" }, 500)
+          .effect("highlight", { color: "#ffa3a3" }, 800)
           .dequeue()
-          .effect("shake", { distance: 4, times: 3 });
+          .effect("shake", { distance: 1.5, times: 3 });
       }
       let minus = $("#score" + current_player).html();
       minus--;
