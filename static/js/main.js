@@ -140,7 +140,7 @@ $(document).ready(function () {
       for (let i = 0; i < chosen_cards.length; i++) {
         $("img[src='/static/img/" + chosen_cards[i] + ".png']")
           .parent(".card")
-          .effect("highlight", { color: "#ffa3a3" }, 800)
+          .effect("highlight", { color: "#ffa3a3" }, 1500)
           .dequeue()
           .effect("shake", { distance: 1.5, times: 3 });
       }
@@ -162,11 +162,13 @@ $(document).ready(function () {
     $(".button").prop("disabled", false);
     $("label input[type='checkbox']").prop("disabled", true);
     setTimeout(() => {
-      if (find_set() === 0) {
-        current_card < 81
-          ? alert("沒有可能的組合，請抽三張牌")
-          : alert("沒有可能的組合，遊戲結束");
-        no_set = true;
+      if ($("input[type='checkbox']").length < 21) {
+        if (find_set() === 0) {
+          current_card < 81
+            ? alert("沒有可能的組合，請抽三張牌")
+            : alert("沒有可能的組合，遊戲結束");
+          no_set = true;
+        }
       }
     }, 1200);
   });
