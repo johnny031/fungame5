@@ -6,6 +6,7 @@ let chosen_cards = [];
 let extra_cards = [];
 let x = n.length;
 let code = [];
+let no_set = false;
 for (let i = 1; i < 4; i++) {
   for (let j = 1; j < 4; j++) {
     for (let k = 1; k < 4; k++) {
@@ -71,9 +72,13 @@ $(document).ready(function () {
     if (current_card > 78) {
       $(this).prop("disabled", true);
     }
-    setTimeout(() => {
-      find_set() === 0 && alert("沒有可能的組合，請抽三張牌");
-    }, 800);
+    if (no_set) {
+      setTimeout(() => {
+        find_set() === 0
+          ? alert("仍無可能的組合，再抽三張牌")
+          : (no_set = false);
+      }, 800);
+    }
   });
   for (let i = 0; i < n.length; i++) {
     let btn = document.createElement("button");
@@ -152,7 +157,10 @@ $(document).ready(function () {
     $("label input[type='checkbox']").prop("checked", false);
     $("label input[type='checkbox']").prop("disabled", true);
     setTimeout(() => {
-      find_set() === 0 && alert("沒有可能的組合，請抽三張牌");
+      if (find_set() === 0) {
+        alert("沒有可能的組合，請抽三張牌");
+        no_set = true;
+      }
     }, 1500);
   });
   $("#board_toggle").on("click", function () {
@@ -164,7 +172,10 @@ $(document).ready(function () {
   $("#set_left").on("click", function () {
     alert("有 " + find_set() + " 種可能組合");
   });
-  find_set() === 0 && alert("沒有可能的組合，請抽三張牌");
+  if (find_set() === 0) {
+    alert("沒有可能的組合，請抽三張牌");
+    no_set = true;
+  }
 });
 function change_cards(chosen_cards) {
   if (current_card > 78) {
