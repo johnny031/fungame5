@@ -217,7 +217,7 @@ function change_cards(chosen_cards) {
         $("img[src='/static/img/" + r[current_card + i - 3] + ".png']")
           .parent(".card")
           .animate({ opacity: 1 }, 600)
-          .effect("highlight", { color: "#fffc96" }, 1500);
+          .effect("highlight", { color: "#fffc96" }, 1000);
       }
     }, 600);
   }
