@@ -179,7 +179,9 @@ $(document).ready(function () {
     $("#qrcode").slideToggle();
   });
   $("#set_left").on("click", function () {
-    alert("有 " + find_set() + " 種可能組合");
+    $("input[type='checkbox']").length > 21
+      ? alert("牌數過多無法計算")
+      : alert("有 " + find_set() + " 種可能組合");
   });
   if (find_set() === 0) {
     alert("沒有可能的組合，請抽三張牌");
@@ -217,7 +219,7 @@ function change_cards(chosen_cards) {
         $("img[src='/static/img/" + r[current_card + i - 3] + ".png']")
           .parent(".card")
           .animate({ opacity: 1 }, 600)
-          .effect("highlight", { color: "#fffc96" }, 1000);
+          .effect("highlight", { color: "#fffc96" }, 800);
       }
     }, 600);
   }
