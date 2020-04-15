@@ -200,9 +200,9 @@ function change_cards(chosen_cards) {
     for (let i = 0; i < 3; i++) {
       $("img[src='/static/img/" + chosen_cards[i] + ".png']")
         .parent(".card")
-        .effect("highlight", { color: "#fffc96" }, 1000)
+        .effect("highlight", { color: "#fffda3" }, 1000)
         .dequeue()
-        .animate({ opacity: 0 }, 600);
+        .animate({ opacity: 0 }, 800);
       $("input[value='" + chosen_cards[i] + "']").attr(
         "value",
         r[current_card + i]
@@ -219,9 +219,9 @@ function change_cards(chosen_cards) {
         $("img[src='/static/img/" + r[current_card + i - 3] + ".png']")
           .parent(".card")
           .animate({ opacity: 1 }, 600)
-          .effect("highlight", { color: "#fffc96" }, 800);
+          .effect("highlight", { color: "#fffda3" }, 900);
       }
-    }, 600);
+    }, 800);
   }
 }
 function rearrange(chosen_cards) {
