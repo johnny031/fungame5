@@ -193,7 +193,9 @@ function change_cards(chosen_cards) {
     for (let i = 0; i < 3; i++) {
       $("img[src='/static/img/" + chosen_cards[i] + ".png']")
         .parent(".card")
-        .css("visibility", "hidden");
+        .effect("highlight", { color: "#fffda3" }, 800)
+        .dequeue()
+        .animate({ opacity: 0 }, 800);
       $("input[value='" + chosen_cards[i] + "']").remove();
     }
   } else {
