@@ -65,7 +65,7 @@ canvas {
   border-radius: 1vw;
 }
 .card img {
-  filter: brightness(0.8);
+  filter: brightness(0.9);
   display: inline-block;
   position: relative;
   margin-left: auto;

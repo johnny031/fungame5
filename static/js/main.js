@@ -173,7 +173,7 @@ $(document).ready(function () {
     }, 1600);
   });
   $("#board_toggle").on("click", function () {
-    $(".board_div").slideToggle();
+    $(".board_div").slideToggle("fast");
   });
   $("#qrcode_btn").on("click", function () {
     $("#qrcode").slideToggle();
